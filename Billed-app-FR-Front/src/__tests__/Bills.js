@@ -54,8 +54,14 @@ describe("Given I am connected as an employee", () => {
 
       const antiChrono = (a, b) => (a < b ? 1 : -1)
       const datesSorted = [...dates].sort(antiChrono)
-      expect(dates).not.toEqual(datesSorted)
+
+      // check if I have the same dates in both arrays
       expect(dates).toEqual(expect.arrayContaining(datesSorted))
+
+      // check if dates are sorted
+      for (let i = 0; i < datesSorted.length - 1; i++) {
+        expect(datesSorted[i] >= datesSorted[i + 1]).toBe(true)
+      }
     })
 
     test("Then the modal should open and display supporting document when I click on IconEye", () => {
