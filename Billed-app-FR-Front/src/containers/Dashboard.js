@@ -134,28 +134,31 @@ export default class {
     $("#btn-refuse-bill").click((e) => this.handleRefuseSubmit(e, bill))
   }
 
-  handleAcceptSubmit = (e, bill) => {
+  handleAcceptSubmit = async (e, bill) => {
+    e.preventDefault()
     const newBill = {
       ...bill,
       status: "accepted",
       commentAdmin: $("#commentary2").val(),
     }
-    this.updateBill(newBill)
+    await this.updateBill(newBill)
     this.onNavigate(ROUTES_PATH["Dashboard"])
   }
 
-  handleRefuseSubmit = (e, bill) => {
+  handleRefuseSubmit = async (e, bill) => {
+    e.preventDefault()
     const newBill = {
       ...bill,
       status: "refused",
       commentAdmin: $("#commentary2").val(),
     }
-    this.updateBill(newBill)
+    await this.updateBill(newBill)
     this.onNavigate(ROUTES_PATH["Dashboard"])
   }
 
   // OPEN OR CLOSE THE CONTAINER TO DISPLAY ALL CARDS
   handleShowTickets(e, bills, index) {
+    e.preventDefault()
     if (this.counters[index] === undefined || this.index !== index)
       this.counters[index] = 0
     if (this.index === undefined || this.index !== index) this.index = index
